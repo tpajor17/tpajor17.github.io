@@ -6,12 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Document</title>
+    <title>US Map</title>
 </head>
 <body>
     <div id="app">
         <div id="tooltip">
             {{ tooltip }}
+        </div>
+        <div id="slideout">
+            <div id="title">
+                <img :src="Slideout.icon" alt="">
+                <h2>{{ Slideout.title }}</h2>
+            </div>
+            <template v-for="(p, index) in Slideout.paragraphs">
+                <p v-if="index + 1 < Slideout.paragraphs.length">
+                    {{ p }}
+                </p>
+                <p
+                    v-if="index + 1 == Slideout.paragraphs.length"
+                    style="padding-bottom: 60px"
+                >
+                    {{ p }}
+                </p>
+            </template>
         </div>
         <svg
             xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -449,6 +466,11 @@
     </div>
 
     <style>
+        body {
+            background-color: #bbf6ff;
+            overflow: hidden;
+        }
+
         #app {
             display: flex;
             justify-content: center;
@@ -462,6 +484,8 @@
 
         #app #us-map path {
             fill: #00dfff !important;
+            stroke-width: 2px !important;
+            stroke: #003e47;
         }
 
         #app #us-map path:hover {
@@ -478,16 +502,75 @@
             text-align: center;
             font-size: 15px;
             display: none;
-            z-index: 999;
+            z-index: 1;
+        }
+
+        #slideout {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: black;
+            color: white;
+            z-index: 2;
+            height: 100%;
+            width: 30%;
+            padding: 30px;
+            display: none;
+            overflow-y: auto;
+        }
+
+        #slideout p {
+            text-align: justify;
+        }
+
+        #slideout #title {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        #slideout #title img {
+            width: 45px;
+            height: 30px;
+            margin-right: 20px;
+            border-radius: 8px;
+            border: 2px solid gray;
         }
     </style>
     <script>
         var app = new Vue({
             el: '#app',
             data: {
-                tooltip: 'Hi'
+                tooltip: String,
+                States: [],
+                Slideout: {}
             },
-            mounted(){
+            methods: {
+                FetchData(){
+                    return fetch('data.xml').then(d => d.text());
+                },
+                XMLTOJSON(xml){
+                    let dom = new DOMParser().parseFromString(xml, 'text/xml');
+                    let root = dom.getElementById('data');
+
+                    for(let i = 0; i < root.children.length; i++){
+                        let code = root.children[i].getAttribute('code');
+
+                        if(!code || code == "") continue;
+
+                        let obj = {
+                            code: code,
+                            paragraphs: Array.from(root.children[i].getElementsByTagName('paragraphs')[0].children).map(el => el.innerHTML)
+                        };
+
+                        this.States.push(obj);
+                    }
+                }
+            },
+            async mounted(){
+                let xml = await this.FetchData();
+                this.XMLTOJSON(xml);
+
                 window.onmousemove = (e) => {
                     var tooltip = document.getElementById('tooltip');
 
@@ -495,7 +578,7 @@
                         let id = e.target.id;
                         let state = e.target.getAttribute('data-name');
 
-                        this.tooltip = state;
+                        this.tooltip = `${state} (${id})`;
 
                         tooltip.style.display = 'block';
 
@@ -503,6 +586,26 @@
                     }
                     else {
                         tooltip.style.display = 'none';
+                    }
+                }
+
+                window.onclick = (e) => {
+                    let slideout = document.getElementById('slideout');
+                    let state = this.States.filter(el => el.code == e.target.id)[0];
+
+                    if(state) {
+                        this.Slideout = {
+                            title: e.target.getAttribute('data-name'),
+                            paragraphs: state.paragraphs,
+                            icon: `http://flags.ox3.in/svg/us/${e.target.id.toLowerCase()}.svg`
+                        }
+
+                        slideout.style.display = 'block';
+                    }
+                    else {
+                        if(e.target == slideout || slideout.contains(e.target)) return;
+
+                        slideout.style.display = 'none';
                     }
                 }
 
