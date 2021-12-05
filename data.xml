@@ -1,8 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root id="data">
-  <state code="">
+  <location code="" type="">
     <paragraphs>
       <p></p>
     </paragraphs>
-  </state>
+  </location>
+  <location code="TX" type="state">
+    <paragraphs>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in hendrerit dolor, sed dapibus odio. Etiam quis nisi eget est semper bibendum. Sed malesuada nisi vitae sem facilisis, eget luctus sapien pulvinar. Vestibulum at tellus mi. Duis laoreet in dolor pharetra aliquam. Maecenas quis interdum metus. In et felis lacinia, consectetur arcu ac, interdum mauris. Vivamus imperdiet efficitur aliquam. Maecenas dictum sem libero. In est velit, consequat sed urna vel, dapibus dapibus mi. Pellentesque nec nulla ut sapien dictum condimentum nec in diam. Sed facilisis aliquam tellus, sed pulvinar ipsum faucibus ut. Nullam et orci accumsan, vulputate turpis et, sagittis felis.</p>
+      <p>Curabitur volutpat purus id risus maximus, id elementum eros consequat. Pellentesque posuere lectus ac nisi varius suscipit. Ut tristique congue mauris. Cras aliquet erat in felis imperdiet, quis facilisis nunc dictum. Nullam fringilla, ex ac volutpat tempor, libero justo egestas enim, in porttitor eros ex ac lectus. Phasellus quis consequat risus. Cras accumsan gravida justo, id tincidunt dui dictum eget. Sed volutpat nibh nibh, id imperdiet metus sagittis non. Sed eget condimentum turpis, ac hendrerit ante. Nullam semper finibus lacus vitae eleifend. Etiam nisi urna, congue at tortor non, consequat pulvinar nulla. Integer lacinia facilisis sem, eget feugiat metus.</p>
+    </paragraphs>
+  </location>
+  <location code="LAS" type="city">
+    <paragraphs>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in hendrerit dolor, sed dapibus odio. Etiam quis nisi eget est semper bibendum. Sed malesuada nisi vitae sem facilisis, eget luctus sapien pulvinar. Vestibulum at tellus mi. Duis laoreet in dolor pharetra aliquam. Maecenas quis interdum metus. In et felis lacinia, consectetur arcu ac, interdum mauris. Vivamus imperdiet efficitur aliquam. Maecenas dictum sem libero. In est velit, consequat sed urna vel, dapibus dapibus mi. Pellentesque nec nulla ut sapien dictum condimentum nec in diam. Sed facilisis aliquam tellus, sed pulvinar ipsum faucibus ut. Nullam et orci accumsan, vulputate turpis et, sagittis felis.</p>
+      <p>Curabitur volutpat purus id risus maximus, id elementum eros consequat. Pellentesque posuere lectus ac nisi varius suscipit. Ut tristique congue mauris. Cras aliquet erat in felis imperdiet, quis facilisis nunc dictum. Nullam fringilla, ex ac volutpat tempor, libero justo egestas enim, in porttitor eros ex ac lectus. Phasellus quis consequat risus. Cras accumsan gravida justo, id tincidunt dui dictum eget. Sed volutpat nibh nibh, id imperdiet metus sagittis non. Sed eget condimentum turpis, ac hendrerit ante. Nullam semper finibus lacus vitae eleifend. Etiam nisi urna, congue at tortor non, consequat pulvinar nulla. Integer lacinia facilisis sem, eget feugiat metus.</p>
+    </paragraphs>
+  </location>
 </root>

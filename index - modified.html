@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <title>US Map</title>
+</head>
+<body>
+    <div id="app">
+         <button
+            id="credits"
+            class="btn btn-primary"
+            @click="ShowCredits"
+         >
+            Info
+         </button>
+        <div id="tooltip">
+            <template>
+               {{ tooltipData.place }}
+               <template v-if="tooltipData.code && tooltipData.tagName != 'rect' && tooltipData.code() != ''">
+                  ({{ tooltipData.code() }})
+               </template>
+            </template>
+        </div>
+        <div id="slideout">
+            <div id="title">
+                <img v-if="Slideout.type == 'state'" :src="Slideout.icon" alt="">
+                <h2>{{ Slideout.title }}</h2>
+            </div>
+            <template v-for="(p, index) in Slideout.paragraphs">
+                <p v-if="index + 1 < Slideout.paragraphs.length">
+                    {{ p }}
+                </p>
+                <p
+                    v-if="index + 1 == Slideout.paragraphs.length"
+                    style="padding-bottom: 60px"
+                >
+                    {{ p }}
+                </p>
+            </template>
+        </div>
+    </div>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+        body {
+            background-color: #bbf6ff;
+            overflow: hidden;
+            font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+        }
+
+        #app {
+            display: flex;
+            justify-content: center;
+        }
+
+        #app #us-map {
+            position: absolute;
+            top: -220px;
+            left: -200px;
+            max-width: 180%;
+        }
+
+        #us-map > path {
+            fill: #00dfff;
+            stroke-width: 2px;
+            stroke: #003e47;
+        }
+
+        #us-map > path:hover {
+            fill: #73edff;
+            cursor: pointer;
+        }
+
+        #us-map > ellipse {
+           fill: white;
+           stroke-width: 2px !important;
+        }
+
+        #us-map > ellipse:hover {
+           cursor: pointer;
+           fill: black;
+        }
+
+        #tooltip {
+            position: fixed;
+            color: white;
+            background: black;
+            padding: 5px 30px;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 15px;
+            display: none;
+            z-index: 1;
+            font-family: Ubuntu, Helvetica, Arial, sans-serif;
+        }
+
+        #slideout {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: black;
+            color: white;
+            z-index: 2;
+            height: 100%;
+            min-width: 250px;
+            max-width: 40%;
+            padding: 30px;
+            display: none;
+            overflow-y: auto;
+            font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+        }
+
+        #slideout p {
+            text-align: justify;
+        }
+
+        #slideout #title {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        #slideout #title img {
+            width: 45px;
+            height: 30px;
+            margin-right: 20px;
+            border-radius: 8px;
+            border: 2px solid gray;
+        }
+
+        .selected {
+            fill: #ff8e00 !important;
+        }
+
+        button {
+            min-width: 90px;
+            min-height: 40px;
+            cursor: pointer;
+            font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+            font-size: 16px;
+        }
+
+        #credits {
+           position: fixed;
+           top: 10px;
+           left: 10px;
+           z-index: 1;
+        }
+    </style>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                tooltip: String,
+                Places: [],
+                allPlaces: [],
+                Slideout: {},
+                QuizMode: false,
+                correctAnswers: [],
+                quizCurrentState: {
+                    name: '',
+                    code: ''
+                },
+                selected: undefined,
+                tooltipData: ''
+            },
+            methods: {
+                FetchData(){
+                    return fetch('data.xml').then(d => d.text());
+                },
+                FetchMap(){
+                   return fetch('us.svg').then(d => d.text());
+                },
+                ShowCredits(){
+                   alert(`Credits:
+                           \n- SVG map by SimpleMaps: https://simplemaps.com/resources/svg-us
+                           \n- Bootstrap 5: https://www.bootstrapcdn.com/
+                  `);
+                },
+                XMLTOJSON(xml){
+                    let dom = new DOMParser().parseFromString(xml, 'text/xml');
+                    let root = dom.getElementById('data');
+
+                    for(let i = 0; i < root.children.length; i++){
+                        let code = root.children[i].getAttribute('code');
+                        let type = root.children[i].getAttribute('type')
+
+                        if(!code || code == "" || !type || type == "") continue;
+
+                        let obj = {
+                            code: code,
+                            type: type,
+                            paragraphs: Array.from(root.children[i].getElementsByTagName('paragraphs')[0].children).map(el => el.innerHTML)
+                        };
+
+                        this.Places.push(obj);
+                    }
+                },
+                ShowInfo(e){
+                    let slideout = document.getElementById('slideout');
+                    let place = this.Places.filter(el => el.code == e.target.id)[0];
+                    
+                    if(e.target == slideout || slideout.contains(e.target)) return;
+
+                    if(this.selected) this.selected.classList.remove('selected');
+
+                    if(place) {
+                        this.Slideout = {
+                            title: e.target.getAttribute('data-name') ||this.tooltipData.place,
+                            type: place.type,
+                            paragraphs: place.paragraphs,
+                            icon: `http://flags.ox3.in/svg/us/${e.target.id.toLowerCase()}.svg`
+                        };
+
+                        this.selected = e.target;
+                        this.selected.classList.add('selected');
+                        slideout.style.display = 'block';
+                    }
+                    else {
+                        slideout.style.display = 'none';
+                    }
+                }
+            },
+            async mounted(){
+                let xml = await this.FetchData();
+                let map = new DOMParser().parseFromString(await this.FetchMap(), 'text/xml');
+               
+                document.querySelector('#app').appendChild(map.documentElement);
+
+                this.XMLTOJSON(xml);
+                this.allPlaces = Array.from(document.getElementById('us-map').children).map(
+                    e => {
+                        return {
+                            name: e.getAttribute('data-name'),
+                            code: e.id
+                        }
+                    }
+                ).filter(
+                    e => e.name != null
+                );
+
+                window.onmousemove = (e) => {
+                    var tooltip = document.getElementById('tooltip');
+
+                    if($(e.target).parents('#us-map') && e.target.id && (e.target.tagName == 'path' || e.target.tagName == 'ellipse' || e.target.tagName == 'rect')){
+                        let id = e.target.id;
+                        let place = e.target.getAttribute('data-name');
+                        let desc = e.target.querySelector('desc');
+                        let label = e.target.getAttribute('inkscape:label');
+                        let tagName = e.target.tagName;
+
+                        this.tooltipData = {
+                           id: id,
+                           place: place || desc.innerHTML,
+                           code: function() {
+                              if(tagName == 'path') return id;
+                              else if(tagName == 'ellipse') return label;
+                              else if(tagName == 'rect') return desc.innerHTML;
+                              else return undefined;
+                           },
+                           desc: (desc) ? desc.innerHTML : "",
+                           tagName: tagName
+                        };
+
+                        tooltip.style.display = 'block';
+
+                        TooltipMove(e);
+                    }
+                    else {
+                        tooltip.style.display = 'none';
+                    }
+                }
+
+                window.onclick = (e) => {
+                    this.ShowInfo(e);
+                };
+
+                function TooltipMove(e){
+                    let x = e.clientX;
+                    let y = e.clientY;
+
+                    tooltip.style.left = (x + 20) + 'px';
+                    tooltip.style.top = y + 'px';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

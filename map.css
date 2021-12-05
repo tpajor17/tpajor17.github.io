@@ -1,0 +1,20 @@
+#us-map > path {
+    fill: #00dfff;
+    stroke-width: 2px;
+    stroke: #003e47;
+}
+
+#us-map > path:hover {
+    fill: #73edff;
+    cursor: pointer;
+}
+
+#us-map > ellipse {
+    fill: black;
+    stroke-width: 2px !important;
+}
+
+#us-map > ellipse:hover {
+    cursor: pointer;
+    fill: rgb(180, 180, 180);
+}
