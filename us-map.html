@@ -32,6 +32,16 @@
                 <img v-if="Slideout.type == 'state'" :src="Slideout.icon" alt="">
                 <h2>{{ Slideout.title }}</h2>
             </div>
+            <p style="text-align: left;">
+                <small>
+                    <a
+                        :href="`https://commons.wikimedia.org/wiki/File:Flag_of_${Slideout.title.replace(' ', '_')}.svg`"
+                        target="_blank"
+                    >
+                        Link to the flag used.
+                    </a>
+                </small>
+            </p>
             <template v-for="(p, index) in Slideout.paragraphs">
                 <p v-if="index + 1 < Slideout.paragraphs.length">
                     {{ p }}
@@ -54,6 +64,10 @@
             background-color: #bbf6ff;
             overflow: hidden;
             font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+        }
+
+        a {
+            color: #00bdf0;
         }
 
         #app {
@@ -162,7 +176,9 @@
                 tooltip: String,
                 Places: [],
                 allPlaces: [],
-                Slideout: {},
+                Slideout: {
+                    title: ''
+                },
                 QuizMode: false,
                 correctAnswers: [],
                 quizCurrentState: {
@@ -180,6 +196,8 @@
                    return fetch('us.svg').then(d => d.text());
                 },
                 ShowCredits(){
+                    let flags = '';
+
                    alert(`Credits:
                            \n- SVG map by SimpleMaps: https://simplemaps.com/resources/svg-us
                            \n- Bootstrap 5: https://www.bootstrapcdn.com/
@@ -213,11 +231,13 @@
                     if(this.selected) this.selected.classList.remove('selected');
 
                     if(place) {
+                        let name = e.target.getAttribute('data-name');
+
                         this.Slideout = {
-                            title: e.target.getAttribute('data-name') ||this.tooltipData.place,
+                            title: name || this.tooltipData.place,
                             type: place.type,
                             paragraphs: place.paragraphs,
-                            icon: `http://flags.ox3.in/svg/us/${e.target.id.toLowerCase()}.svg`
+                            icon: `/icons/${e.target.id}.svg`
                         };
 
                         this.selected = e.target;
