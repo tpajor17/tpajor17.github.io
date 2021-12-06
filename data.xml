@@ -5,16 +5,50 @@
       <p></p>
     </paragraphs>
   </location>
-  <location code="TX" type="state">
+  <location code="SF" type="city">
     <paragraphs>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in hendrerit dolor, sed dapibus odio. Etiam quis nisi eget est semper bibendum. Sed malesuada nisi vitae sem facilisis, eget luctus sapien pulvinar. Vestibulum at tellus mi. Duis laoreet in dolor pharetra aliquam. Maecenas quis interdum metus. In et felis lacinia, consectetur arcu ac, interdum mauris. Vivamus imperdiet efficitur aliquam. Maecenas dictum sem libero. In est velit, consequat sed urna vel, dapibus dapibus mi. Pellentesque nec nulla ut sapien dictum condimentum nec in diam. Sed facilisis aliquam tellus, sed pulvinar ipsum faucibus ut. Nullam et orci accumsan, vulputate turpis et, sagittis felis.</p>
-      <p>Curabitur volutpat purus id risus maximus, id elementum eros consequat. Pellentesque posuere lectus ac nisi varius suscipit. Ut tristique congue mauris. Cras aliquet erat in felis imperdiet, quis facilisis nunc dictum. Nullam fringilla, ex ac volutpat tempor, libero justo egestas enim, in porttitor eros ex ac lectus. Phasellus quis consequat risus. Cras accumsan gravida justo, id tincidunt dui dictum eget. Sed volutpat nibh nibh, id imperdiet metus sagittis non. Sed eget condimentum turpis, ac hendrerit ante. Nullam semper finibus lacus vitae eleifend. Etiam nisi urna, congue at tortor non, consequat pulvinar nulla. Integer lacinia facilisis sem, eget feugiat metus.</p>
+      <p>Places:</p>
+      <p>- 🌉 The Golden Gate Bridge: it spans almost 2 miles (3.2 kilometres) long and 750 feet (228 metres) high. It connects San Francisco to the Marin Headlands.</p>
+      <p>- Union Square: a shopping region.</p>
+      <p>- Chinatown</p>
+      <p>- Embarcadero</p>
+      <p>- Fisherman’s Wharf</p>
+      <p>- Pier 39</p>
+      <p>- Alcatraz: it held prisoners until 1963.</p>
+      <p>- Haight Ashbury district</p>
+      <p>- Palace of Fine Arts</p>
+      <p>- Golden Gate Park</p>
+      <p>- Baker Beach</p>
+      <p>- Muir Woods National Monument</p>
+      <p>- Sausalito: a bayside town.</p>
+      <p>Fun fact: the fictional city San Fierro from Grand Theft Auto: San Andreas was based on San Francisco.</p>
     </paragraphs>
   </location>
   <location code="LAS" type="city">
     <paragraphs>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in hendrerit dolor, sed dapibus odio. Etiam quis nisi eget est semper bibendum. Sed malesuada nisi vitae sem facilisis, eget luctus sapien pulvinar. Vestibulum at tellus mi. Duis laoreet in dolor pharetra aliquam. Maecenas quis interdum metus. In et felis lacinia, consectetur arcu ac, interdum mauris. Vivamus imperdiet efficitur aliquam. Maecenas dictum sem libero. In est velit, consequat sed urna vel, dapibus dapibus mi. Pellentesque nec nulla ut sapien dictum condimentum nec in diam. Sed facilisis aliquam tellus, sed pulvinar ipsum faucibus ut. Nullam et orci accumsan, vulputate turpis et, sagittis felis.</p>
-      <p>Curabitur volutpat purus id risus maximus, id elementum eros consequat. Pellentesque posuere lectus ac nisi varius suscipit. Ut tristique congue mauris. Cras aliquet erat in felis imperdiet, quis facilisis nunc dictum. Nullam fringilla, ex ac volutpat tempor, libero justo egestas enim, in porttitor eros ex ac lectus. Phasellus quis consequat risus. Cras accumsan gravida justo, id tincidunt dui dictum eget. Sed volutpat nibh nibh, id imperdiet metus sagittis non. Sed eget condimentum turpis, ac hendrerit ante. Nullam semper finibus lacus vitae eleifend. Etiam nisi urna, congue at tortor non, consequat pulvinar nulla. Integer lacinia facilisis sem, eget feugiat metus.</p>
+      <p>Places:</p>
+      <p>- Union Station</p>
+      <p>- Little Tokyo</p>
+      <p>- Walt Disney Music Hall</p>
+      <p>- Los Angeles Country Museum of Art</p>
+      <p>- La Brea Tar Pits and George C. Page Museum: preserved animals and plants</p>
+      <p>- Rodeo Drive (in Beverly Hills 🤑): the world’s most expensive place to shop</p>
+      <p>- 🎥 Hollywood and 👣 Hollywood Walk of Fame</p>
+      <p>- Griffith Park and Griffith Observatory</p>
+      <p>- Universal Studios</p>
+      <p>- Knott’s Berry Farm</p>
+      <p>- 🏰 Disneyland Park</p>
+      <p>- Los Angeles Port: USS Iowa: a World War II battleship</p>
+      <p>- Aquarium of the Pacific</p>
+      <p>- Long Beach</p>
+      <p>- Catalina Island</p>
+      <p>- Santa Monica: a resort town</p>
+      <p>- Santa Monica Pier</p>
+      <p>- Venice Beach</p>
+      <p>- Santa Monica Mountains: The Getty Center</p>
+      <p>- Malibu</p>
+      <p>Fun fact: the fictional city Los Santos from Grand Theft Auto: San Andreas and Grand Theft Auto V was modelled after Los Angeles. The city doesn’t feature all of the above locations, but you can find some of the more iconic ones, e.g. Galileo Observatory (Griffith Observatory), Vespucci Beach (Venice Beach), the Vinewood sign (the Hollywood sign), Del Perro Pier (Santa Monica Pier).</p>
+      <p>If you’re interested: https://www.youtube.com/watch?v=SM6bSPcgYnA</p>
     </paragraphs>
   </location>
 </root>

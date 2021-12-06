@@ -37,6 +37,7 @@
                     <a
                         :href="`https://commons.wikimedia.org/wiki/File:Flag_of_${Slideout.title.replace(' ', '_')}.svg`"
                         target="_blank"
+                        v-if="Slideout.type == 'state'"
                     >
                         Link to the flag used.
                     </a>
@@ -54,6 +55,7 @@
                 </p>
             </template>
         </div>
+        <div id="map-container"></div>
     </div>
 
     <style>
@@ -77,8 +79,8 @@
 
         #app #us-map {
             position: absolute;
-            top: -220px;
-            left: -200px;
+            top: -40%;
+            left: -30%;
             max-width: 180%;
         }
 
@@ -253,7 +255,7 @@
                 let xml = await this.FetchData();
                 let map = new DOMParser().parseFromString(await this.FetchMap(), 'text/xml');
                
-                document.querySelector('#app').appendChild(map.documentElement);
+                document.querySelector('#map-container').appendChild(map.documentElement);
 
                 this.XMLTOJSON(xml);
                 this.allPlaces = Array.from(document.getElementById('us-map').children).map(
