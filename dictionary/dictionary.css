@@ -1,0 +1,36 @@
+footer a, .bg-primary a:not(.btn), .bg-dark a {
+    color: white;
+}
+
+footer a:hover, .bg-primary a:not(.btn):hover, .bg-dark a:hover {
+    color: white;
+    opacity: .75;
+}
+
+a:not(.btn):active {
+    outline: 2px dotted gray;
+}
+
+input[type="text"] {
+    border: 1px solid black;
+}
+
+#search-container input {
+    font-size: 18pt;
+}
+
+.suggestion-link {
+    font-size: 18pt;
+}
+
+.suggestion-link:hover {
+    background: rgba(128, 128, 128, 0.267);
+}
+
+.examples-list {
+    list-style-type: none;
+}
+
+.examples-list li::before {
+    content: '»';
+}

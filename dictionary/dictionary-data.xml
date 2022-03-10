@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <dictionary>
+    <entry>
+      <!--LEAVE THIS ENTRY EMPTY - IT'S FOR YOU TO COPY TO CREATE A NEW ONE-->
+      <term />
+      <definitions>
+        <def>
+          <part-of-speech />
+          <explanation />
+          <credits></credits>
+          <examples>
+            <example />
+          </examples>
+          <synonyms>
+            <synonym />
+          </synonyms>
+        </def>
+      </definitions>
+    </entry>
+    <entry>
+      <!---->
+      <term>Hello</term>
+      <definitions>
+        <def>
+          <part-of-speech>greeting</part-of-speech>
+          <explanation>An expression you use when greeting someone, especially when on the phone.</explanation>
+          <examples>
+            <example>Hello Patrick, how have you been?</example>
+          </examples>
+          <synonyms>
+            <synonym>Hi</synonym>
+            <synonym>Hey</synonym>
+          </synonyms>
+        </def>
+      </definitions>
+    </entry>
+  </dictionary>
+</root>
