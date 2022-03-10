@@ -1,3 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    font-family: League Spartan, 'Open Sans', Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 1.25em;
+    padding-top: 30px;
+}
+
+#suggestions {
+    position: relative;
+    top: 0;
+    border: 1px solid gray;
+}
+
+#suggestions a {
+    width: 100%;
+    display: block;
+}
+
+#suggestions a:active {
+    outline: 2px dotted gray;
+}
+
 footer a, .bg-primary a:not(.btn), .bg-dark a {
     color: white;
 }
